@@ -145,8 +145,7 @@
 }
 
 .navbar-nav .nav-link.active {
-    color: blue;
-    font-weight: bold;
+    background-color: #F3E1C5;
 }
 
 .navbar-nav .nav-link:hover {

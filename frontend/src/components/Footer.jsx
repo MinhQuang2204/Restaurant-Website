@@ -10,6 +10,10 @@ const Footer = () => {
                 <p>Created by Tran Minh Quang & Nguyen Duc Tin</p>
             </div>
             <div className="footer-container">
+                <div class="tooltip-container">
+                    <span class="tooltip">Uiverse.io</span>
+                    <span class="text">@</span>
+                </div>
                 <div className="footer-section">
                     <h3>About Us</h3>
                     <Link to="/about" className="footer-link">Learn More</Link>
