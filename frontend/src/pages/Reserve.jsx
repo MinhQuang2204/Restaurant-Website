@@ -1,44 +1,26 @@
 import React from 'react';
-import './About.css';
-import AboutChef1 from '../utils/img/about-chef1.jpg';
-import AboutChef2 from '../utils/img/about-chef2.jpg';
-import ImageGallery from '../components/ImageGallery';
-import Reviews from '../components/Reviews';
+import './Reserve.css';
 
 const About = () => {
     return (
-        <div className='about-page'>
-            <header className='mt-5'>
-                <div className='container h-100 d-flex align-items-center justify-content-center'>
-                    <h1 className='text-light'>About</h1>
+        <div className="about-page">
+            {/* Hero Section */}
+            <section className="hero">
+                <div className="hero-text">
+                    <h1>Reserve Your Table, Savor The Moments!</h1>
                 </div>
-            </header>
+            </section>
 
-            <div className='container my-5'>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate dolores necessitatibus quaerat non, explicabo consectetur laudantium vel dicta consequatur eum quo aspernatur officia? Tempore doloribus enim quas nam aspernatur est nostrum sint facere iste nesciunt nemo explicabo, vitae aut impedit, voluptatem reiciendis corrupti similique laudantium! Quaerat itaque ipsum quo eaque?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio necessitatibus recusandae ducimus saepe consequuntur velit dolorem similique assumenda, asperiores voluptatum vel modi minima omnis a quia quo molestiae. Incidunt cumque ea odit optio, iusto voluptas ratione vitae obcaecati temporibus fuga minima provident aut quasi autem expedita quia dolores at placeat perferendis. Nisi qui earum inventore soluta explicabo, labore ut ea nemo reprehenderit minus repellat, impedit atque vel debitis autem veritatis optio laboriosam officiis molestiae maxime repellendus beatae tempora sapiente! Quam!</p>
-
-                <div className='row'>
-                    <div className='col-lg-6'>
-                        <img src={AboutChef1} className='img-fluid my-4' alt="" />
-                    </div>
-                    <div className='col-lg-6'>
-                        <img src={AboutChef2} className='img-fluid my-4' alt="" />
-                    </div>
-                </div>
-
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, esse nulla, debitis similique, ad nihil architecto maiores doloribus quis blanditiis distinctio. Praesentium, harum atque fuga nobis eius laboriosam totam consequuntur officia dolorem quo velit incidunt fugiat at maxime, molestias esse dignissimos accusantium enim debitis. Id et quidem sapiente adipisci dolor ipsa amet tempora porro atque perferendis. Libero odio, molestiae aliquam modi facere, veritatis, illo labore deserunt ducimus ipsam rem ipsum perspiciatis eveniet maiores excepturi. Architecto sit ducimus inventore officia porro vel? Accusantium recusandae nisi autem iste suscipit distinctio, libero rem.</p>
-            </div>
-
-            <div className='bg-dark text-light'>
-                <ImageGallery />
-            </div>
-
-            <div className='my-0'>
-                <Reviews />
-            </div>
+            {/* Content Section */}
+            <section className="content">
+                <h2>Experience The Convenience Of Booking Your Table!</h2>
+                <p>
+                At our restaurant, we believe that every dining experience should be seamless and enjoyable. That's why we offer a hassle-free reservation system that allows you to secure your table ahead of time. Whether you're planning a special occasion, a romantic dinner, or a casual gathering with friends, booking your table ensures that you have the perfect spot waiting for you. Simply choose your desired date and time, and let us take care of the rest. Enjoy a memorable meal with exceptional service and delectable dishes, all without the worry of wait times. Reserve your table today and savor the moments with us!
+                </p>
+                <button>Reserve now!</button>
+            </section>
         </div>
-    )
-}
+    );
+};
 
 export default About;
