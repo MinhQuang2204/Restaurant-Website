@@ -21,11 +21,11 @@ const About = () => {
 
                 <div className='meal-section'>
                     <section className='meal-section-1'>
-                        <div className='col-lg-8'>
+                        <div className='col-lg-7'>
                             <img src={Food1} className='img-fluid my-4' alt="" />
                         </div>
-                        <div className='col-lg-6'>
-                            <p className='w-75'>COLLETTA CARY
+                        <div className='col-lg-5'>
+                            <p className='w-100'>COLLETTA CARY
                                 Seasonal changes, outstanding ingredients and a made-from-scratch philosophy guide Colletta's menu of house-made focaccia and pasta, antipastis, made-to-order wood-fired pizzas, and piatti. The chef curated dinner and dessert menus, pair with the well balanced wine and beverage program.
                                 Located at Fenton in Cary, NC, this casual yet polished family-style Italian restaurant features 120 indoor dining seats, 60 seats outdoors on the semi-covered patio, and a 12-seat bar.</p>
                         </div>
@@ -36,7 +36,7 @@ const About = () => {
                                 Located at Avalon in Alpharetta, GA, Colleta Atlanta's restaurant's open-concept dining room is anchored around the kitchen's wood-burning oven, reminiscent of the hearth in a family home. Accented by reclaimed barn wood and refined ceramic tile, the modern space envelops guests in a welcoming atmosphere - whether they're visiting the bar for a hand-crafted cocktail or a glass of wine, grabbing a pizza with the kids or sitting down for a family-style dinner with friends and colleagues.r.
                             </p>
                         </div>
-                        <div className='col-lg-6'>
+                        <div className='col-lg-5'>
                             <img src={Food2} className='img-fluid my-4' alt="" />
                         </div>
                     </section>

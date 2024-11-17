@@ -9,7 +9,7 @@
     bottom: 0px;
     left: 0;
     width: 100%;
-    background-color: #F3E1C5;
+    background-color: #49230C;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     padding: 0;
@@ -24,7 +24,7 @@
 
 .footer-section h3 {
     font-size: 1.2rem;
-    color: black;
+    color: #D4C7A5;
     margin-bottom: 5px;
 }
 
@@ -37,7 +37,7 @@
 
 .footer-link {
     font-weight: bold;
-    color: #007bff;
+    color: white;
     text-decoration: none;
     transition: color 0.3s ease;
 }

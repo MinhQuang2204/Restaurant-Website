@@ -7,7 +7,6 @@
 .about-page {
     background-color: #F3E1C5;
     margin-top: 3rem;
-
 }
 
 .meal-section p {
@@ -30,6 +29,7 @@
 
 .meal-section-1 {
     display: flex;
+    align-items: center;
 }
 
 .meal-section-2 {
