@@ -1,0 +1,39 @@
+.about-page header {
+    background-image: url(../utils/img/about.png);
+    width: 1320px;
+    height: 450px;
+}
+
+.about-page{
+    background-color: #F3E1C5;
+}
+
+.meal-section p{
+    background: #FFF;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 27px;
+    width: 50%;
+    line-height: 1.6;
+}
+
+.meal-section {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    margin-bottom: 5%;  
+    gap: 20px;
+}
+
+.meal-section-1 {
+    display: flex;
+}
+
+.meal-section-2 {
+    display: flex;
+}
+
+.about-page img{
+    border-radius: 10px;
+}
