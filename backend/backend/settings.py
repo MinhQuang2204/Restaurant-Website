@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0y^hjiz)8svv4(s4mp08tnhkv8k*a&ce6dyuc7h_h82usx+0gy'
+SECRET_KEY = 'django-insecure-c47os_9)y*i(vk%95(vlk#8v!-najfd%=c_y7c$d-bjp$33$ve'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'myapp'
 ]
 
 MIDDLEWARE = [
@@ -75,8 +76,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'NhaHangDB',  # Tên database
+        'USER': 'postgres',   # Tên user PostgreSQL
+        'PASSWORD': '22042002',  # Mật khẩu
+        'HOST': 'localhost',  # Địa chỉ máy chủ (hoặc IP)
+        'PORT': '5432',       # Cổng mặc định của PostgreSQL
     }
 }
 
@@ -121,3 +126,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+INSTALLED_APPS += [
+    'corsheaders',
+]
+MIDDLEWARE += [
+    'corsheaders.middleware.CorsMiddleware',
+]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  # Địa chỉ ReactJS
+]

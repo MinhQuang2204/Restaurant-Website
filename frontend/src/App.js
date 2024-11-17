@@ -9,6 +9,7 @@ import Reserve from './pages/Reserve';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Reservation from './pages/Reservation';
+import TestAPI from './pages/testapi';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/reserve" element={<Reserve />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/reservation" element={<Reservation />} />
+        <Route path='/testapi' element={<TestAPI />} />
       </Routes>
 
       <Footer />
