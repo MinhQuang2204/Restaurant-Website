@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const FindTable = () => {
-    // State lưu thông tin đầu vào
+const FindTable = ({ setSelectedTable }) => {
     const [soghe, setSoghe] = useState('');
     const [ngay, setNgay] = useState('');
     const [khunggio, setKhunggio] = useState('');
@@ -10,7 +9,6 @@ const FindTable = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    // Hàm xử lý gửi request tìm bàn
     const handleFindTable = async () => {
         setLoading(true);
         setError('');
@@ -21,7 +19,7 @@ const FindTable = () => {
                 khunggio,
             });
 
-            setTables(response.data.available_tables); // Cập nhật danh sách bàn trống
+            setTables(response.data.available_tables);
         } catch (err) {
             setError(err.response?.data?.error || 'Có lỗi xảy ra!');
         } finally {
@@ -81,6 +79,7 @@ const FindTable = () => {
                         {tables.map((table) => (
                             <li key={table.maban}>
                                 Bàn số {table.maban} - Số ghế: {table.soghe} - Tình trạng: {table.tinhtrang}
+                                <button onClick={() => setSelectedTable(table)}>Chọn</button>
                             </li>
                         ))}
                     </ul>
