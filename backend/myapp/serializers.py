@@ -11,4 +11,19 @@ class KhachHangSerializer(serializers.ModelSerializer):
         model = Khachhang
         fields = '__all__'
 
+class MonAnSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Monan
+        fields = '__all__'
+
+class ChiTietMonAnSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chitietmonan
+        fields = '__all__'
+
+class DatBanSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Datban
+        fields = '__all__'
+
 # Tương tự cho các bảng khác

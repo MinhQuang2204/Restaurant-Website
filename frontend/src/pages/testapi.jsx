@@ -15,9 +15,11 @@ const BanList = () => {
             <h1>Danh sách bàn</h1>
             <ul>
                 {ban.map(item => (
-                    <li key={item.MaBan}>
-                        Bàn {item.MaBan}: {item.TinhTrang} - {item.SoGhe} ghế
-                    </li>
+                    item.tinhtrang === 'Available' && (
+                        <li key={item.maban}>
+                            Bàn {item.maban} - {item.soghe} ghế
+                        </li>
+                    )
                 ))}
             </ul>
         </div>

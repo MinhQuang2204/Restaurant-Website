@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from datetime import datetime
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,9 +27,13 @@ from myapp.views import *
 
 router = DefaultRouter()
 router.register(r'ban', BanViewSet)
-# router.register(r'khachhang', KhachHangViewSet)
+router.register(r'khachhang', KhachHangViewSet)
+router.register(r'monan',MonAnViewSet)
+router.register(r'chitietmoan',ChiTietMonAnViewSet)
+router.register(r'datban',DatBanViewSet)
 # Tương tự cho các bảng khác
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('find_table/', find_table, name='find_table'),
 ]
