@@ -94,6 +94,16 @@ const FindTable = ({ setSelectedTable }) => {
                         >
                             Choose Table
                         </button>
+                        <button class="btn-53" onClick={() => setSelectedTable({ ...table, date, timeslot })}
+                        >
+                            <div class="original">Choose Table</div>
+                            <div class="letters">
+
+                                <span>Choose</span>
+                                <span>Table</span>
+                            </div>
+                        </button>
+
                     </div>
                 ))}
             </div>
