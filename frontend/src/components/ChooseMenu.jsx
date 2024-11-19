@@ -6,7 +6,7 @@ const ChooseMenu = ({ setOrder, selectedTable }) => {
 
     // Lấy danh sách menu từ API
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/monan/')
+        fetch('http://127.0.0.1:8000/dish/')
             .then(res => res.json())
             .then(data => setMenu(data))
             .catch(err => console.error('Error fetching menu:', err));
@@ -14,11 +14,11 @@ const ChooseMenu = ({ setOrder, selectedTable }) => {
 
     // Hàm thêm món vào order
     const handleSelectMenuItem = (item) => {
-        const existingItem = order.find(o => o.mamon === item.mamon);
+        const existingItem = order.find(o => o.dishid === item.dishid);
         if (existingItem) {
             // Nếu món đã có trong danh sách, tăng số lượng
             setLocalOrder(order.map(o =>
-                o.mamon === item.mamon ? { ...o, soluong: o.soluong + 1 } : o
+                o.dishid === item.dishid ? { ...o, soluong: o.soluong + 1 } : o
             ));
         } else {
             // Nếu món chưa có, thêm mới vào danh sách
@@ -39,12 +39,12 @@ const ChooseMenu = ({ setOrder, selectedTable }) => {
     return (
         <div>
             <h2>Chọn Món Ăn</h2>
-            <h3>Bàn {selectedTable.maban} - {selectedTable.soghe} ghế</h3>
+            <h3>Bàn {selectedTable.tableid} - {selectedTable.seats} ghế</h3>
             {/* Hiển thị danh sách menu */}
             <ul>
                 {menu.map(item => (
-                    <li key={item.mamon}>
-                        {item.tenmon} - {item.gia} VND
+                    <li key={item.dishid}>
+                        {item.name} - {item.price} VND
                         <button onClick={() => handleSelectMenuItem(item)}>Chọn</button>
                     </li>
                 ))}
@@ -53,8 +53,8 @@ const ChooseMenu = ({ setOrder, selectedTable }) => {
             {/* Hiển thị danh sách món đã chọn */}
             <ul>
                 {order.map(item => (
-                    <li key={item.mamon}>
-                        {item.tenmon} - {item.soluong} x {item.gia} VND
+                    <li key={item.dishid}>
+                        {item.name} - {item.soluong} x {item.price} VND
                     </li>
                 ))}
             </ul>

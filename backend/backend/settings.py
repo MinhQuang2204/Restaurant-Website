@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'NhaHangDB',  # Tên database
+        'NAME': 'RestaurantDB',  # Tên database
         'USER': 'postgres',   # Tên user PostgreSQL
         'PASSWORD': '22042002',  # Mật khẩu
         'HOST': 'localhost',  # Địa chỉ máy chủ (hoặc IP)

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const FindTable = ({ setSelectedTable }) => {
-    const [soghe, setSoghe] = useState('');
-    const [ngay, setNgay] = useState('');
-    const [khunggio, setKhunggio] = useState('');
+    const [seats, setSeats] = useState('');
+    const [date, setDate] = useState('');
+    const [timeslot, setTimeslot] = useState('');
     const [tables, setTables] = useState([]); // Danh sách bàn trống
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -14,9 +14,9 @@ const FindTable = ({ setSelectedTable }) => {
         setError('');
         try {
             const response = await axios.post('http://localhost:8000/find_table/', {
-                soghe,
-                ngay,
-                khunggio,
+                seats,
+                date,
+                timeslot,
             });
 
             setTables(response.data.available_tables);
@@ -36,8 +36,8 @@ const FindTable = ({ setSelectedTable }) => {
                     Số ghế:
                     <input
                         type="number"
-                        value={soghe}
-                        onChange={(e) => setSoghe(e.target.value)}
+                        value={seats}
+                        onChange={(e) => setSeats(e.target.value)}
                         style={{ marginLeft: '10px' }}
                     />
                 </label>
@@ -46,8 +46,8 @@ const FindTable = ({ setSelectedTable }) => {
                     Ngày:
                     <input
                         type="date"
-                        value={ngay}
-                        onChange={(e) => setNgay(e.target.value)}
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
                         style={{ marginLeft: '10px' }}
                     />
                 </label>
@@ -56,8 +56,8 @@ const FindTable = ({ setSelectedTable }) => {
                     Khung giờ:
                     <input
                         type="time"
-                        value={khunggio}
-                        onChange={(e) => setKhunggio(e.target.value)}
+                        value={timeslot}
+                        onChange={(e) => setTimeslot(e.target.value)}
                         style={{ marginLeft: '10px' }}
                     />
                 </label>
@@ -77,9 +77,11 @@ const FindTable = ({ setSelectedTable }) => {
                     <h3>Danh sách bàn trống:</h3>
                     <ul>
                         {tables.map((table) => (
-                            <li key={table.maban}>
-                                Bàn số {table.maban} - Số ghế: {table.soghe} - Tình trạng: {table.tinhtrang}
-                                <button onClick={() => setSelectedTable(table)}>Chọn</button>
+                            <li key={table.tableid}>
+                                Bàn số {table.tableid} - Số ghế: {table.seats} - Tình trạng: {table.status}
+                                <button onClick={() => setSelectedTable({
+                                    ...table, date, timeslot
+                                })}>Chọn</button>
                             </li>
                         ))}
                     </ul>

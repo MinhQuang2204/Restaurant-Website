@@ -1,29 +1,29 @@
 from rest_framework import serializers
 from .models import *
 
-class BanSerializer(serializers.ModelSerializer):
+class DiningtableSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Ban
+        model = Diningtable
         fields = '__all__'
 
-class KhachHangSerializer(serializers.ModelSerializer):
+class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Khachhang
+        model = Customer
         fields = '__all__'
 
-class MonAnSerializer(serializers.ModelSerializer):
+class DishSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Monan
+        model = Dish
         fields = '__all__'
 
-class ChiTietMonAnSerializer(serializers.ModelSerializer):
+class DishdetailSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Chitietmonan
+        model = Dishdetail
         fields = '__all__'
 
-class DatBanSerializer(serializers.ModelSerializer):
+class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Datban
+        model = Reservation
         fields = '__all__'
 
 # Tương tự cho các bảng khác

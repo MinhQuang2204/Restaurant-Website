@@ -1,81 +1,119 @@
 import React, { useState } from 'react';
 
-const Confirm = ({ selectedTable, order }) => {
+const ConfirmInfo = ({ selectedTable, order, setOrder }) => {
+    // State để lưu thông tin khách hàng
     const [customerInfo, setCustomerInfo] = useState({
-        name: '',
-        phone: '',
         email: '',
+        fullname: '',
+        phone: ''
     });
 
+    // Hàm để cập nhật thông tin khách hàng
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setCustomerInfo({ ...customerInfo, [name]: value });
+        setCustomerInfo(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    // Hàm xác nhận và gửi thông tin đặt bàn và món ăn
+    const handleConfirm = () => {
+        // Kiểm tra xem thông tin khách hàng đã đầy đủ chưa
+        if (!customerInfo.email || !customerInfo.fullname || !customerInfo.phone) {
+            alert('Vui lòng điền đầy đủ thông tin!');
+            return;
+        }
 
-        // Gửi thông tin xác nhận đặt bàn lên server
-        const bookingDetails = {
-            customer: customerInfo,
-            table: selectedTable,
-            order: order,
+        // Gửi thông tin đến API để tạo đặt bàn và món ăn (bạn cần tạo một API trên backend Django)
+        const reservationData = {
+            email: customerInfo.email,
+            fullname: customerInfo.fullname,
+            phone: customerInfo.phone,
+            tableid: selectedTable.tableid,
+            date: selectedTable.date,
+            timeslot: selectedTable.timeslot,
+            order: order
         };
 
-        fetch('/api/confirm-booking', {
+        // Gửi dữ liệu lên server (API tạo đặt bàn và lưu món ăn)
+        fetch('http://127.0.0.1:8000/api/reservation/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(bookingDetails),
+            body: JSON.stringify(reservationData)
         })
-            .then(res => res.json())
+            .then(response => response.json())
             .then(data => {
-                alert('Đặt bàn thành công!');
+                if (data.success) {
+                    alert('Đặt bàn thành công!');
+                    setOrder([]); // Xóa đơn hàng sau khi đặt bàn thành công
+                } else {
+                    alert('Có lỗi xảy ra, vui lòng thử lại!');
+                }
             })
-            .catch(err => console.error('Error confirming booking:', err));
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra, vui lòng thử lại!');
+            });
     };
 
     return (
         <div>
-            <h2>Xác Nhận Thông Tin Đặt Bàn</h2>
-            <h3>Bàn {selectedTable.maban} - {selectedTable.soghe} ghế</h3>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Họ tên:</label>
-                    <input
-                        type="text"
-                        name="name"
-                        value={customerInfo.name}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Số điện thoại:</label>
-                    <input
-                        type="text"
-                        name="phone"
-                        value={customerInfo.phone}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={customerInfo.email}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div>
-                    <button type="submit">Xác Nhận Đặt Bàn</button>
-                </div>
-            </form>
+            <h2>Xác Nhận Đặt Bàn</h2>
+
+            {/* Form nhập thông tin khách hàng */}
+            <div>
+                <label>Email:</label>
+                <input
+                    type="email"
+                    name="email"
+                    value={customerInfo.email}
+                    onChange={handleInputChange}
+                    placeholder="Nhập email"
+                />
+            </div>
+            <div>
+                <label>Tên:</label>
+                <input
+                    type="text"
+                    name="fullname"
+                    value={customerInfo.fullname}
+                    onChange={handleInputChange}
+                    placeholder="Nhập tên"
+                />
+            </div>
+            <div>
+                <label>Số điện thoại:</label>
+                <input
+                    type="text"
+                    name="phone"
+                    value={customerInfo.phone}
+                    onChange={handleInputChange}
+                    placeholder="Nhập số điện thoại"
+                />
+            </div>
+
+            {/* Hiển thị thông tin bàn đã chọn */}
+            <h3>Thông Tin Đặt Bàn</h3>
+            <p>Bàn: {selectedTable.tableid} - {selectedTable.seats} ghế</p>
+            <p>Date: {selectedTable.date} - Time: {selectedTable.timeslot} </p>
+
+            {/* Hiển thị danh sách món ăn đã chọn */}
+            <h3>Danh Sách Món Đã Chọn</h3>
+            <ul>
+                {order.map(item => (
+                    <li key={item.dishid}>
+                        {item.name} - {item.quantity} x {item.price} VND
+                    </li>
+                ))}
+            </ul>
+
+            {/* Nút xác nhận */}
+            <button onClick={handleConfirm}>Xác Nhận</button>
         </div>
     );
 };
 
-export default Confirm;
+export default ConfirmInfo;
