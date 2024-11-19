@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import JsonResponse
 
 # Create your views here.
 from rest_framework.viewsets import ModelViewSet
@@ -28,7 +27,7 @@ class DatBanViewSet (ModelViewSet) :
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from datetime import datetime
+from datetime import datetime, timedelta
 
 @api_view(['POST'])
 def find_table(request):
@@ -42,12 +41,20 @@ def find_table(request):
             return Response({"error": "Thiếu thông tin số ghế, ngày hoặc khung giờ!"}, status=400)
         
         # Lọc các bàn có số ghế phù hợp
-        tables = Ban.objects.filter(soghe__gte=soghe)
+        tables = Ban.objects.filter(soghe__gte=soghe, tinhtrang='Available')
 
-        # Lấy danh sách bàn đã được đặt ở ngày và giờ cụ thể
+
+        search_time = datetime.strptime(khunggio, '%H:%M').time()
+    
+
+        # Tính khoảng thời gian ±2 tiếng
+        lower_bound = (datetime.combine(datetime.today(), search_time) - timedelta(hours=2)).time()
+        upper_bound = (datetime.combine(datetime.today(), search_time) + timedelta(hours=2)).time()
+
+        # Lấy danh sách bàn đã được đặt trong khoảng thời gian đó
         booked_tables = Datban.objects.filter(
             ngay=ngay,
-            khunggio=khunggio
+            khunggio__range=(lower_bound, upper_bound)
         ).values_list('maban', flat=True)
 
         # Loại trừ các bàn đã được đặt

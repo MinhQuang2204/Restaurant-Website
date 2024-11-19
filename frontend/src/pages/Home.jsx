@@ -30,7 +30,7 @@ const Home = () => {
                 </section>
 
                 <section className='quote-section-2'>
-                    <button className="see-more">See more...</button>
+                    <button onClick={() => window.location.href = '/about'} className="see-more">See more...</button>
                     <img src={Dish2} alt="Dish 2" className="dish-image" />
                 </section>
             </section>
@@ -45,7 +45,7 @@ const Home = () => {
                 </section>
                 <section className='dining-section-2'>
                     <img src={RestaurantImage3} alt="Rooftop View" className="dining-image" />
-                    <button className="book-now">Book now!</button>
+                    <button onClick={() => window.location.href = '/reservation'} className="book-now">Book now!</button>
                 </section>
             </section>
         </div>
