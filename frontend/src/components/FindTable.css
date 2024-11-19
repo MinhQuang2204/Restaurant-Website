@@ -1,0 +1,58 @@
+.find-table-container {
+    background-color: #EDF5E9;
+    border-radius: 20px;
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    border: 2px solid black;
+    font-family: 'Allerta';
+    font-size: 20px;
+}
+
+.find-table-container img {
+    border-radius: 20px;
+}
+
+.find-table-container h2{
+    font-family: 'Alkalami';
+}
+
+.form {
+    margin-bottom: 20px;
+}
+
+.input {
+    padding: 8px;
+    margin-right: 10px;
+}
+
+.btn {
+    padding: 8px 20px;
+    background-color: #f77;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn.select-btn {
+    background-color: #4caf50;
+}
+
+.error {
+    color: red;
+}
+
+.table-list {
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+.table-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}

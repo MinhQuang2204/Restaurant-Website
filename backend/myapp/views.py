@@ -85,23 +85,31 @@ def create_reservation(request):
                 'phone': customer_data['phone']
             }
         )
+        table = Diningtable.objects.get(tableid=reservation_data['tableid'])  # Sửa đây để lấy bản ghi Diningtable
 
         # Lưu thông tin đặt bàn
         reservation = Reservation.objects.create(
             email=customer,
-            tableid=reservation_data['tableid'],
+            tableid=table,  # Gán instance Diningtable vào đây
             date=reservation_data['date'],
             timeslot=reservation_data['timeslot'],
-            status='confirmed'  # Ví dụ trạng thái đặt bàn là đã xác nhận
+            status='Pending Confirmation'  # Gán giá trị cho trường status
+
         )
 
         # Lưu thông tin món ăn đã chọn
         for dish in dish_data:
+        # Truy vấn đối tượng Dish từ cơ sở dữ liệu dựa trên dishid
+            dish_instance = Dish.objects.get(dishid=dish['dishid'])
+        
+        # Lưu vào bảng Dishdetail, gán instance của Dish vào dishid
             Dishdetail.objects.create(
                 reservationid=reservation,
-                dishid=dish['dishid'],
+                dishid=dish_instance,  # Gán instance của Dish vào đây
                 quantity=dish['quantity'],
-                totalprice=dish['totalprice']
             )
 
-        return Response({'message': 'Reservation created successfully!'}, status=status.HTTP_201_CREATED)
+    return Response({
+                'message': 'Reservation created successfully!',
+                'reservationid': reservation.reservationid  # Trả về reservationid thay vì id
+            }, status=status.HTTP_201_CREATED)

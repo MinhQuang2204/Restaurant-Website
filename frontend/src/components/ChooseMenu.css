@@ -1,0 +1,55 @@
+.menu-container {
+    padding: 20px;
+    text-align: center;
+    background-color: #EDF5E9;
+    border-radius: 20px;
+    width: 90%;
+    margin: auto;
+    border: 2px solid black;
+    font-family: 'Allerta';
+    font-size: 20px;
+}
+
+.menu-container h2 {
+    font-family: 'Alkalami';
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.selected-menu {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.selected-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.selected-menu li {
+    margin: 5px 0;
+}
+
+.btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+.btn.confirm-btn {
+    margin-top: 20px;
+    padding: 10px;
+}

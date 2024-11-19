@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './FindTable.css'
 
 const FindTable = ({ setSelectedTable }) => {
     const [seats, setSeats] = useState('');
@@ -13,7 +14,7 @@ const FindTable = ({ setSelectedTable }) => {
         setLoading(true);
         setError('');
         try {
-            const response = await axios.post('http://localhost:8000/find_table/', {
+            const response = await axios.post('http://localhost:8000/api/find_table/', {
                 seats,
                 date,
                 timeslot,
@@ -21,72 +22,81 @@ const FindTable = ({ setSelectedTable }) => {
 
             setTables(response.data.available_tables);
         } catch (err) {
-            setError(err.response?.data?.error || 'Có lỗi xảy ra!');
+            setError(err.response?.data?.error || 'Error!');
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div style={{ padding: '20px' }}>
-            <h2>Tìm bàn trống</h2>
-
-            <div style={{ marginBottom: '20px' }}>
-                <label>
-                    Số ghế:
-                    <input
-                        type="number"
-                        value={seats}
-                        onChange={(e) => setSeats(e.target.value)}
-                        style={{ marginLeft: '10px' }}
-                    />
-                </label>
-                <br />
-                <label>
-                    Ngày:
-                    <input
-                        type="date"
-                        value={date}
-                        onChange={(e) => setDate(e.target.value)}
-                        style={{ marginLeft: '10px' }}
-                    />
-                </label>
-                <br />
-                <label>
-                    Khung giờ:
-                    <input
-                        type="time"
-                        value={timeslot}
-                        onChange={(e) => setTimeslot(e.target.value)}
-                        style={{ marginLeft: '10px' }}
-                    />
-                </label>
+        <div className="find-table-container">
+            <h2>Reservation</h2>
+            <div className="form">
+                <select
+                    value={seats}
+                    onChange={(e) => setSeats(e.target.value)}
+                    className="input"
+                >
+                    <option value="" disabled>
+                        Select number of people
+                    </option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <input
+                    type="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    className="input"
+                />
+                <input
+                    type="time"
+                    value={timeslot}
+                    onChange={(e) => setTimeslot(e.target.value)}
+                    className="input"
+                />
+                <button onClick={handleFindTable} className="btn">
+                    {loading ? 'Finding...' : 'Find a Table'}
+                </button>
             </div>
-
-            {/* Nút tìm bàn */}
-            <button onClick={handleFindTable} disabled={loading}>
-                {loading ? 'Đang tìm...' : 'Tìm bàn'}
-            </button>
-
-            {/* Hiển thị lỗi */}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-
-            {/* Hiển thị danh sách bàn */}
-            {tables.length > 0 && (
-                <div style={{ marginTop: '20px' }}>
-                    <h3>Danh sách bàn trống:</h3>
-                    <ul>
-                        {tables.map((table) => (
-                            <li key={table.tableid}>
-                                Bàn số {table.tableid} - Số ghế: {table.seats} - Tình trạng: {table.status}
-                                <button onClick={() => setSelectedTable({
-                                    ...table, date, timeslot
-                                })}>Chọn</button>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
+            {error && <p className="error">{error}</p>}
+            <div className="table-list">
+                {tables.map((table) => (
+                    <div key={table.tableid} className="table-card">
+                        {/* Thêm hình ảnh cho từng table */}
+                        <img
+                            src={(() => {
+                                try {
+                                    return require(`../utils/img/${table.tableid}.jpg`);
+                                } catch {
+                                    try {
+                                        return require(`../utils/img/${table.tableid}.png`);
+                                    } catch {
+                                        try {
+                                            return require(`../utils/img/${table.tableid}.gif`);
+                                        } catch {
+                                            return require(`../utils/img/default.jpg`); // Hình ảnh mặc định nếu không tìm thấy
+                                        }
+                                    }
+                                }
+                            })()} // Đường dẫn động tới ảnh
+                            alt={`Table ${table.tableid}`}
+                            className="table-image"
+                        />
+                        <h4>Table {table.tableid}</h4><br />
+                        <p>Seats: {table.seats}</p>
+                        <button
+                            onClick={() => setSelectedTable({ ...table, date, timeslot })}
+                            className="btn select-btn"
+                        >
+                            Choose Table
+                        </button>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

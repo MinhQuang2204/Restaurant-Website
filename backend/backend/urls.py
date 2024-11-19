@@ -35,6 +35,6 @@ router.register(r'reservation',ReservationViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('find_table/', find_table, name='find_table'),
-    path('create_reservation/', create_reservation, name='create_reservation'),
+    path('api/find_table/', find_table, name='find_table'),
+    path('api/create_reservation/', create_reservation, name='create_reservation'),
 ]

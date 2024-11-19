@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './ChooseMenu.css'
 
 const ChooseMenu = ({ setOrder, selectedTable }) => {
     const [menu, setMenu] = useState([]);
@@ -29,36 +30,50 @@ const ChooseMenu = ({ setOrder, selectedTable }) => {
     // Hàm xác nhận danh sách món ăn đã chọn
     const handleConfirmOrder = () => {
         if (order.length === 0) {
-            alert('Bạn chưa chọn món nào!');
+            alert("You Haven't Choose Any Meals!");
             return;
         }
-        // Truyền danh sách order lên component cha
-        setOrder(order);
+        // Truyền danh sách order lên component cha, bao gồm thông tin quantity
+        const orderWithquantity = order.map(item => ({
+            name: item.name,
+            dishid: item.dishid,
+            quantity: item.soluong,
+            price: item.price,  // Bạn có thể gửi thêm giá nếu cần thiết
+        }));
+
+        setOrder(orderWithquantity);  // Truyền danh sách món đã chọn với thông tin quantity
     };
 
     return (
-        <div>
-            <h2>Chọn Món Ăn</h2>
-            <h3>Bàn {selectedTable.tableid} - {selectedTable.seats} ghế</h3>
-            {/* Hiển thị danh sách menu */}
-            <ul>
-                {menu.map(item => (
-                    <li key={item.dishid}>
-                        {item.name} - {item.price} VND
-                        <button onClick={() => handleSelectMenuItem(item)}>Chọn</button>
+        <div className="menu-container">
+            <h2>Menu Selection</h2>
+            <h4>Table {selectedTable.tableid}</h4>
+            <ul className="menu-list">
+                {menu.map((item) => (
+                    <li key={item.dishid} className="menu-item">
+                        {item.name} - ${item.price}
+                        <button
+                            onClick={() => handleSelectMenuItem(item)}
+                            className="btn choose-btn"
+                        >
+                            Choose
+                        </button>
                     </li>
                 ))}
             </ul>
-            <h3>Danh Sách Món Chọn</h3>
-            {/* Hiển thị danh sách món đã chọn */}
-            <ul>
-                {order.map(item => (
-                    <li key={item.dishid}>
-                        {item.name} - {item.soluong} x {item.price} VND
-                    </li>
-                ))}
-            </ul>
-            <button onClick={handleConfirmOrder}>Xác nhận</button>
+            <div className="selected-menu">
+                <h3>Selected Menu</h3>
+                <ul>
+                    {order.map((item) => (
+                        <li key={item.dishid}>
+                            {item.name} (x{item.soluong}) - ${item.price * item.soluong}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <button onClick={handleConfirmOrder} className="btn confirm-btn">
+                Confirm Selection
+            </button>
         </div>
     );
 };
