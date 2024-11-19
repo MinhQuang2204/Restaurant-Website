@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './ConfirmInfo.css'
 
 const ConfirmInfo = ({ selectedTable, order, setOrder }) => {
     // State để lưu thông tin khách hàng
@@ -60,58 +61,51 @@ const ConfirmInfo = ({ selectedTable, order, setOrder }) => {
     };
 
     return (
-        <div>
-            <h2>Confirm Reservation</h2>
-
-            {/* Form nhập thông tin khách hàng */}
-            <div>
-                <label>Email:</label>
+        <div className="confirm-info-container">
+            <h2>Reservation Details</h2>
+            <div className="reservation-table">
+                <p>Table ID: {selectedTable.tableid}</p>
+                <p>Date: {selectedTable.date}</p>
+                <p>Time Slot: {selectedTable.timeslot}</p>
+                <h3>Selected Menu</h3>
+                <ul>
+                    {order.map((item) => (
+                        <li key={item.dishid}>
+                            {item.name} (x{item.soluong}) - ${item.price * item.soluong}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div className="customer-info">
+                <h3>Customer Information</h3>
                 <input
                     type="email"
                     name="email"
                     value={customerInfo.email}
                     onChange={handleInputChange}
-                    placeholder="Input Here"
+                    placeholder="Email"
+                    className="input"
                 />
-            </div>
-            <div>
-                <label>Name:</label>
                 <input
                     type="text"
                     name="fullname"
                     value={customerInfo.fullname}
                     onChange={handleInputChange}
-                    placeholder="Input Here"
+                    placeholder="Full Name"
+                    className="input"
                 />
-            </div>
-            <div>
-                <label>Phone Number:</label>
                 <input
                     type="text"
                     name="phone"
                     value={customerInfo.phone}
                     onChange={handleInputChange}
-                    placeholder="Input Here"
+                    placeholder="Phone"
+                    className="input"
                 />
             </div>
-
-            {/* Hiển thị thông tin bàn đã chọn */}
-            <h3>Reservation Details</h3>
-            <p>Table: {selectedTable.tableid} - {selectedTable.seats} Seats</p>
-            <p>Date: {selectedTable.date} - Time: {selectedTable.timeslot} </p>
-
-            {/* Hiển thị danh sách món ăn đã chọn */}
-            <h3>Your Menu</h3>
-            <ul>
-                {order.map(item => (
-                    <li key={item.dishid}>
-                        {item.name} - {item.quantity} x {item.price} USD
-                    </li>
-                ))}
-            </ul>
-
-            {/* Nút xác nhận */}
-            <button onClick={handleConfirm}>Confirm</button>
+            <button onClick={handleConfirm} className="btn">
+                Confirm
+            </button>
         </div>
     );
 };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './ChooseMenu.css'
 
 const ChooseMenu = ({ setOrder, selectedTable }) => {
     const [menu, setMenu] = useState([]);
@@ -37,28 +38,35 @@ const ChooseMenu = ({ setOrder, selectedTable }) => {
     };
 
     return (
-        <div>
-            <h2>Choose Your Menu</h2>
-            <h3>Table {selectedTable.tableid} - {selectedTable.seats} Seats</h3>
-            {/* Hiển thị danh sách menu */}
-            <ul>
-                {menu.map(item => (
-                    <li key={item.dishid}>
-                        {item.name} - {item.price} USD
-                        <button onClick={() => handleSelectMenuItem(item)}>Choose</button>
+        <div className="menu-container">
+            <h2>Menu Selection</h2>
+            <h4>Table {selectedTable.tableid}</h4>
+            <ul className="menu-list">
+                {menu.map((item) => (
+                    <li key={item.dishid} className="menu-item">
+                        {item.name} - ${item.price}
+                        <button
+                            onClick={() => handleSelectMenuItem(item)}
+                            className="btn choose-btn"
+                        >
+                            Choose
+                        </button>
                     </li>
                 ))}
             </ul>
-            <h3>Meals List</h3>
-            {/* Hiển thị danh sách món đã chọn */}
-            <ul>
-                {order.map(item => (
-                    <li key={item.dishid}>
-                        {item.name} - {item.soluong} x {item.price} USD
-                    </li>
-                ))}
-            </ul>
-            <button onClick={handleConfirmOrder}>Confirm</button>
+            <div className="selected-menu">
+                <h3>Selected Menu</h3>
+                <ul>
+                    {order.map((item) => (
+                        <li key={item.dishid}>
+                            {item.name} (x{item.soluong}) - ${item.price * item.soluong}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <button onClick={handleConfirmOrder} className="btn confirm-btn">
+                Confirm Selection
+            </button>
         </div>
     );
 };

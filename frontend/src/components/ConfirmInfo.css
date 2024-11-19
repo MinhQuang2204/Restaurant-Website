@@ -1,0 +1,35 @@
+.confirm-info-container {
+    padding: 20px;
+    text-align: center;
+    background-color: #EDF5E9;
+    border-radius: 20px;
+    width: 90%;
+    margin: auto;
+    border: 2px solid black;
+    font-family: 'Allerta';
+    list-style: none;
+    font-size: 20px;
+}
+
+.confirm-info-container h2 {
+    font-family: 'Alkalami';
+}
+
+.confirm-info-container ul{
+    list-style: none;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+.btn {
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
