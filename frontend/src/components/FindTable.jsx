@@ -58,7 +58,7 @@ const FindTable = ({ setSelectedTable }) => {
                     onChange={(e) => setTimeslot(e.target.value)}
                     className="input"
                 />
-                <button onClick={handleFindTable} className="btn">
+                <button onClick={handleFindTable} className="button">
                     {loading ? 'Finding...' : 'Find a Table'}
                 </button>
             </div>

@@ -62,6 +62,8 @@ const ConfirmInfo = ({ selectedTable, order }) => {
             // Xử lý thành công
             alert(data.message);
             alert(`Your reservation ID is: ${data.reservationid}`);  // Thông báo chứa ID của reservation
+            window.location.reload();  // Reload trang
+
         } catch (error) {
             // Hiển thị lỗi
             console.error('Error:', error);
@@ -114,9 +116,10 @@ const ConfirmInfo = ({ selectedTable, order }) => {
                     className="input"
                 />
             </div>
-            <button onClick={handleConfirm} className="btn">
-                Confirm
+            <button onClick={handleConfirm} className="button">
+                <span>Confirm</span>
             </button>
+
         </div>
     );
 };

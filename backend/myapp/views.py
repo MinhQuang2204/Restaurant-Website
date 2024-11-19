@@ -39,7 +39,7 @@ def find_table(request):
         timeslot = request.data.get('timeslot')
 
         if not seats or not date or not timeslot:
-            return Response({"error": "Thiếu thông tin số ghế, ngày hoặc khung giờ!"}, status=400)
+            return Response({"error": "Mising Information On Seats, Date Or Time!"}, status=400)
         
         # Lọc các bàn có số ghế phù hợp
         tables = Diningtable.objects.filter(seats__gte=seats, status='Available')

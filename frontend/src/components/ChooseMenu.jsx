@@ -71,8 +71,8 @@ const ChooseMenu = ({ setOrder, selectedTable }) => {
                     ))}
                 </ul>
             </div>
-            <button onClick={handleConfirmOrder} className="btn confirm-btn">
-                Confirm Selection
+            <button onClick={handleConfirmOrder} className="button">
+                <span>Confirm Selection</span>
             </button>
         </div>
     );
