@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'NhaHangDB',  # Tên database
+        'NAME': 'nhahangdb',  # Tên database
         'USER': 'postgres',   # Tên user PostgreSQL
-        'PASSWORD': '22042002',  # Mật khẩu
+        'PASSWORD': '123456',  # Mật khẩu
         'HOST': 'localhost',  # Địa chỉ máy chủ (hoặc IP)
         'PORT': '5432',       # Cổng mặc định của PostgreSQL
     }

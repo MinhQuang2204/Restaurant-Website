@@ -1,30 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
-from rest_framework.viewsets import ModelViewSet
-from .models import *
-from .serializers import *
-
-class BanViewSet(ModelViewSet):
-    queryset = Ban.objects.all()
-    serializer_class = BanSerializer
-
-class KhachHangViewSet(ModelViewSet):
-    queryset = Khachhang.objects.all()
-    serializer_class = KhachHangSerializer
-
-class MonAnViewSet (ModelViewSet) :
-    queryset = Monan.objects.all()
-    serializer_class = MonAnSerializer
-
-class ChiTietMonAnViewSet (ModelViewSet) :
-    queryset = Chitietmonan.objects.all()
-    serializer_class = ChiTietMonAnSerializer
-
-class DatBanViewSet (ModelViewSet) :
-    queryset = Datban.objects.all()
-    serializer_class = DatBanSerializer
-
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from datetime import datetime, timedelta

@@ -1,55 +1,64 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-class Ban(models.Model):
-    maban = models.AutoField(primary_key=True)
-    soghe = models.IntegerField()
-    tinhtrang = models.CharField(max_length=20, blank=True, null=True)
+
+class Customer(models.Model):
+    email = models.CharField(primary_key=True, max_length=100)
+    fullname = models.CharField(max_length=100)
+    phone = models.CharField(max_length=15)
 
     class Meta:
         managed = False
-        db_table = 'ban'
+        db_table = 'customer'
 
-class Khachhang(models.Model):
-    makh = models.AutoField(primary_key=True)
-    hoten = models.CharField(max_length=100)
-    sdt = models.CharField(max_length=15)
-    email = models.CharField(max_length=100, blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'khachhang'
-
-class Monan(models.Model):
-    mamon = models.AutoField(primary_key=True)
-    tenmon = models.CharField(max_length=100)
-    gia = models.DecimalField(max_digits=10, decimal_places=2)
+class Diningtable(models.Model):
+    tableid = models.AutoField(primary_key=True)
+    seats = models.IntegerField()
+    status = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'monan'
+        db_table = 'diningtable'
 
 
-class Chitietmonan(models.Model):
-    machitiet = models.AutoField(primary_key=True)
-    madatban = models.ForeignKey('Datban', models.DO_NOTHING, db_column='madatban')
-    mamon = models.ForeignKey('Monan', models.DO_NOTHING, db_column='mamon')
-    soluong = models.IntegerField()
-    thanhtien = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+class Dish(models.Model):
+    dishid = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
         managed = False
-        db_table = 'chitietmonan'
+        db_table = 'dish'
 
 
-class Datban(models.Model):
-    madatban = models.AutoField(primary_key=True)
-    makh = models.ForeignKey('Khachhang', models.DO_NOTHING, db_column='makh')
-    maban = models.ForeignKey(Ban, models.DO_NOTHING, db_column='maban')
-    ngay = models.DateField()
-    khunggio = models.TimeField()
-    trangthai = models.CharField(max_length=20, blank=True, null=True)
+class Dishdetail(models.Model):
+    detailid = models.AutoField(primary_key=True)
+    reservationid = models.ForeignKey('Reservation', models.DO_NOTHING, db_column='reservationid')
+    dishid = models.ForeignKey(Dish, models.DO_NOTHING, db_column='dishid')
+    quantity = models.IntegerField()
+    totalprice = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'datban'
-        unique_together = (('maban', 'ngay', 'khunggio'),)
+        db_table = 'dishdetail'
+
+
+class Reservation(models.Model):
+    reservationid = models.AutoField(primary_key=True)
+    email = models.ForeignKey(Customer, models.DO_NOTHING, db_column='email')
+    tableid = models.ForeignKey(Diningtable, models.DO_NOTHING, db_column='tableid')
+    date = models.DateField()
+    timeslot = models.TimeField()
+    status = models.CharField(max_length=20, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'reservation'
+        unique_together = (('tableid', 'date', 'timeslot'),)
