@@ -7,7 +7,6 @@
     font-style: italic;
     color: white;
     background-color: #49230C;
-    /* Light brown background for contrast */
     padding: 1rem;
     border-radius: 10px;
     width: auto;
@@ -15,7 +14,6 @@
     font-family: 'Allura';
 }
 
-/* Contact Info Section */
 .contact-section {
     display: flex;
     justify-content: space-evenly;
@@ -37,7 +35,6 @@
     color: #4b2e1c;
 }
 
-/* Map and Directions */
 .map-container {
     text-align: center;
     position: relative;

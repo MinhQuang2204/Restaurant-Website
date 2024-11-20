@@ -26,4 +26,3 @@ class ReservationSerializer(serializers.ModelSerializer):
         model = Reservation
         fields = '__all__'
 
-# Tương tự cho các bảng khác

@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'RestaurantDB',  # Tên database
-        'USER': 'postgres',   # Tên user PostgreSQL
-        'PASSWORD': '22042002',  # Mật khẩu
-        'HOST': 'localhost',  # Địa chỉ máy chủ (hoặc IP)
-        'PORT': '5432',       # Cổng mặc định của PostgreSQL
+        'NAME': 'RestaurantDB', 
+        'USER': 'postgres',   
+        'PASSWORD': '22042002', 
+        'HOST': 'localhost', 
+        'PORT': '5432',      
     }
 }
 
@@ -135,5 +135,5 @@ MIDDLEWARE += [
     'corsheaders.middleware.CorsMiddleware',
 ]
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',  # Địa chỉ ReactJS
+    'http://localhost:3000',  
 ]

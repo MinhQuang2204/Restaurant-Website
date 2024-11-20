@@ -16,7 +16,6 @@
 # """
 from django.contrib import admin
 from django.urls import path, include
-from datetime import datetime
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,7 +30,6 @@ router.register(r'customer', CustomerViewSet)
 router.register(r'dish',DishViewSet)
 router.register(r'dishdetail',DishdetailViewSet)
 router.register(r'reservation',ReservationViewSet)
-# Tương tự cho các bảng khác
 
 urlpatterns = [
     path('', include(router.urls)),

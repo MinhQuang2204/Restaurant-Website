@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './FindTable.css'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';  // 
 
 const FindTable = ({ setSelectedTable }) => {
     const [seats, setSeats] = useState('');
     const [date, setDate] = useState('');
     const [timeslot, setTimeslot] = useState('');
-    const [tables, setTables] = useState([]); // Danh sách bàn trống
+    const [tables, setTables] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
 
     const handleFindTable = async () => {
         setLoading(true);
-        setError('');
         try {
             const response = await axios.post('http://localhost:8000/api/find_table/', {
                 seats,
@@ -21,8 +21,10 @@ const FindTable = ({ setSelectedTable }) => {
             });
 
             setTables(response.data.available_tables);
+            toast("Please choose a table! ^_^");
+
         } catch (err) {
-            setError(err.response?.data?.error || 'Error!');
+            toast.warning(err.response?.data?.error || 'Error!');
         } finally {
             setLoading(false);
         }
@@ -58,15 +60,13 @@ const FindTable = ({ setSelectedTable }) => {
                     onChange={(e) => setTimeslot(e.target.value)}
                     className="input"
                 />
-                <button onClick={handleFindTable} className="button">
+                <button onClick={handleFindTable} className="confirm-button">
                     {loading ? 'Finding...' : 'Find a Table'}
                 </button>
             </div>
-            {error && <p className="error">{error}</p>}
             <div className="table-list">
                 {tables.map((table) => (
                     <div key={table.tableid} className="table-card">
-                        {/* Thêm hình ảnh cho từng table */}
                         <img
                             src={(() => {
                                 try {
@@ -78,35 +78,32 @@ const FindTable = ({ setSelectedTable }) => {
                                         try {
                                             return require(`../utils/img/${table.tableid}.gif`);
                                         } catch {
-                                            return require(`../utils/img/default.jpg`); // Hình ảnh mặc định nếu không tìm thấy
+                                            return require(`../utils/img/default.jpg`);
                                         }
                                     }
                                 }
-                            })()} // Đường dẫn động tới ảnh
+                            })()}
                             alt={`Table ${table.tableid}`}
                             className="table-image"
                         />
                         <h4>Table {table.tableid}</h4><br />
                         <p>Seats: {table.seats}</p>
-                        <button
-                            onClick={() => setSelectedTable({ ...table, date, timeslot })}
-                            className="btn select-btn"
-                        >
-                            Choose Table
-                        </button>
+
                         <button class="btn-53" onClick={() => setSelectedTable({ ...table, date, timeslot })}
                         >
                             <div class="original">Choose Table</div>
                             <div class="letters">
-
-                                <span>Choose</span>
-                                <span>Table</span>
+                                <span>N</span>
+                                <span>E</span>
+                                <span>X </span>
+                                <span>T</span>
                             </div>
                         </button>
 
                     </div>
                 ))}
             </div>
+            <ToastContainer position='top-center' autoClose={1000} closeOnClick={true} />
         </div>
     );
 };

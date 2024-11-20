@@ -11,7 +11,6 @@ import RestaurantImage3 from '../utils/img/restaurant-3.jpg';
 const Home = () => {
     return (
         <div className="homepage">
-            {/* Welcome Section */}
             <section className="welcome-section">
                 <div className="welcome-text">
                     <p>
@@ -20,7 +19,6 @@ const Home = () => {
                 <img src={RestaurantImage} alt="Restaurant Interior" className="welcome-image" />
             </section>
 
-            {/* Quote Section */}
             <section className='quote-section'>
                 <section className="quote-section-1">
                     <blockquote>
@@ -35,7 +33,6 @@ const Home = () => {
                 </section>
             </section>
 
-            {/* Dining Experience Section */}
             <section className="dining-section">
                 <section className='dining-section-1'>
                     <img src={RestaurantImage2} alt="Restaurant Setup" className="dining-image" />

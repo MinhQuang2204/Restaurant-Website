@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import './ConfirmInfo.css'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ConfirmInfo = ({ selectedTable, order }) => {
-    // State để lưu thông tin khách hàng
     const [customerInfo, setCustomerInfo] = useState({
         email: '',
         fullname: '',
         phone: ''
     });
 
-    const [loading, setLoading] = useState(false);  // Để xử lý trạng thái đang gửi dữ liệu
-    const [error, setError] = useState(''); // Để hiển thị lỗi nếu có
+    const [loading, setLoading] = useState(false);
 
-    // Hàm để cập nhật thông tin khách hàng
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setCustomerInfo(prevState => ({
@@ -21,15 +20,13 @@ const ConfirmInfo = ({ selectedTable, order }) => {
         }));
     };
 
-    // Hàm xác nhận và gửi thông tin đặt bàn và món ăn
     const handleConfirm = async () => {
         if (!customerInfo.email || !customerInfo.fullname || !customerInfo.phone) {
-            alert('Please Fill In All The Required Information!');
+            toast.warning('Please Fill In All The Required Information!');
             return;
         }
 
         setLoading(true);
-        setError('');
 
         const reservationData = {
             customer: customerInfo,
@@ -51,23 +48,20 @@ const ConfirmInfo = ({ selectedTable, order }) => {
                 body: JSON.stringify(reservationData),
             });
 
-            // Kiểm tra trạng thái HTTP
             if (!response.ok) {
                 const errorData = await response.json();
-                alert(errorData.message || 'Error, Please Try Again!');
+                toast.error(errorData.message || 'Error, Please Try Again!');
             }
 
             const data = await response.json();
 
-            // Xử lý thành công
-            alert(data.message);
-            alert(`Your reservation ID is: ${data.reservationid}`);  // Thông báo chứa ID của reservation
-            window.location.reload();  // Reload trang
-
+            toast.success(data.message);
+            toast.info(`Your reservation ID is: ${data.reservationid}`);
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000);
         } catch (error) {
-            // Hiển thị lỗi
             console.error('Error:', error);
-            setError(error.message);
         } finally {
             setLoading(false);
         }
@@ -116,10 +110,11 @@ const ConfirmInfo = ({ selectedTable, order }) => {
                     className="input"
                 />
             </div>
-            <button onClick={handleConfirm} className="button">
-                <span>Confirm</span>
+            <button onClick={handleConfirm} className="confirm-button">
+                <span>
+                    {loading ? 'Loading...' : 'Confirm'}</span>
             </button>
-
+            <ToastContainer position='top-center' autoClose={3000} />
         </div>
     );
 };

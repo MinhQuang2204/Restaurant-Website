@@ -6,12 +6,10 @@ import Position from '../utils/img/position.png';
 const Contact = () => {
   return (
     <div className="contact-page">
-      {/* Main Content Section */}
       <main>
         <h2 className="main-title">We are here for you</h2>
 
         <section className="contact-section">
-          {/* Meet Us Section */}
           <div className="meet-us">
             <h3>Meet us</h3>
             <li className='telephone'>
@@ -20,7 +18,6 @@ const Contact = () => {
             <p>📍 Address</p>
           </div>
 
-          {/* Pitch Us Section */}
           <div className="pitch-us">
             <h3>Pitch us</h3>
             <li className="facebook">
@@ -32,7 +29,6 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* Map, Logo, and Directions Section */}
         <div className="map-container">
           <div className="map-and-logo">
             <img src={Position} alt="Map" className="map-image" />

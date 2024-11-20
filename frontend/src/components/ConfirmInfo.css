@@ -26,7 +26,7 @@
     box-sizing: border-box;
 }
 
-.button {
+.confirm-button {
     width: 150px;
     padding: 0;
     border: none;
@@ -43,7 +43,7 @@
     background-color: #5cdb95;
 }
 
-.button span {
+.confirm-button span {
     background: #f1f5f8;
     display: block;
     padding: 0.5rem 1rem;
@@ -51,7 +51,7 @@
     border: 2px solid #494a4b;
 }
 
-.button:active {
+.confirm-button:active {
     transform: translateY(5px);
     padding-bottom: 0px;
     outline: 0;

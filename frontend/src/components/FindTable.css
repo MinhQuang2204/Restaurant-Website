@@ -28,7 +28,7 @@
 }
 
 /* From Uiverse.io by mi-series */
-.button {
+.confirm-button {
     width: 150px;
     margin-top: 20px;
     padding: 0;
@@ -46,7 +46,7 @@
     background-color: #5cdb95;
 }
 
-.button span {
+.confirm-button span {
     background: #f1f5f8;
     display: block;
     padding: 0.5rem 1rem;
@@ -54,7 +54,7 @@
     border: 2px solid #494a4b;
 }
 
-.button:active {
+.confirm-button:active {
     transform: translateY(5px);
     padding-bottom: 0px;
     outline: 0;
@@ -78,7 +78,6 @@
     margin-bottom: 10px;
 }
 
-/* From Uiverse.io by doniaskima */
 .btn-53,
 .btn-53 *,
 .btn-53 :after,
@@ -91,7 +90,6 @@
 
 .btn-53 {
     -webkit-tap-highlight-color: transparent;
-    -webkit-appearance: button;
     background-color: #000;
     background-image: none;
     color: #fff;
@@ -102,7 +100,6 @@
     font-size: 100%;
     line-height: 1.5;
     margin: 0;
-    -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
     padding: 0;
 }
 
@@ -116,7 +113,6 @@
 
 .btn-53 svg {
     display: block;
-    vertical-align: middle;
 }
 
 .btn-53 [hidden] {

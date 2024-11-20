@@ -1,5 +1,6 @@
 .hero-text {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(../utils/img/reserve.png); /* Update the path as needed */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(../utils/img/reserve.png);
+    /* Update the path as needed */
     height: 100vh;
     width: 90%;
     margin: auto;
@@ -23,7 +24,6 @@
     text-transform: uppercase;
 }
 
-/* Content Section */
 .content {
     padding: 40px;
     text-align: center;
