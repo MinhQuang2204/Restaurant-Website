@@ -1,36 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Loading from './Loading';
 
 const ReservationDetails = () => {
-    const { reservationid } = useParams(); // Lấy reservationid từ URL
+    const { reservationid } = useParams();
     const [reservation, setReservation] = useState(null);
-    const [dishes, setDishes] = useState([]); // Lưu danh sách món ăn
+    const [dishes, setDishes] = useState([]);
     const [error, setError] = useState('');
-    const [totalBill, setTotalBill] = useState(0); // Lưu tổng bill
+    const [totalBill, setTotalBill] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchReservationDetails = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:8000/api/reservation_details/${reservationid}/`);
-                const data = await response.json();
+                setTimeout(async () => {
+                    const response = await fetch(`http://127.0.0.1:8000/api/reservation_details/${reservationid}/`);
+                    const data = await response.json();
 
-                if (response.ok) {
-                    setReservation(data.reservation);
-                    setDishes(data.dishes);
-                    calculateTotalBill(data.dishes); // Tính tổng bill
-                } else {
-                    setError(data.message || 'Error fetching reservation details');
-                }
+                    if (response.ok) {
+                        setReservation(data.reservation);
+                        setDishes(data.dishes);
+                        calculateTotalBill(data.dishes);
+                    } else {
+                        setError(data.message || 'Error fetching reservation details');
+                    }
+                    setIsLoading(false);
+                }, 2000);
             } catch (err) {
                 console.error('Error fetching reservation details:', err);
                 setError('An error occurred while fetching reservation details');
+                setIsLoading(false);
             }
         };
 
         fetchReservationDetails();
     }, [reservationid]);
 
-    // Hàm tính tổng bill
     const calculateTotalBill = (dishes) => {
         const total = dishes.reduce((sum, dish) => sum + dish.total_price, 0);
         setTotalBill(total);
@@ -38,8 +43,11 @@ const ReservationDetails = () => {
 
     return (
         <div>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {reservation ? (
+            {isLoading ? (
+                <Loading />
+            ) : error ? (
+                <p style={{ color: 'red' }}>{error}</p>
+            ) : (
                 <div>
                     <h2>Reservation Details</h2>
                     <p><strong>Reservation ID:</strong> {reservation.reservationid}</p>
@@ -53,7 +61,7 @@ const ReservationDetails = () => {
                         <ul>
                             {dishes.map(dish => (
                                 <li key={dish.dishid}>
-                                    {dish.name} (x{dish.quantity}) - ${dish.total_price.toFixed(2)}
+                                    {dish.name} ({dish.pric}) (x{dish.quantity}) - ${dish.total_price.toFixed(2)}
                                 </li>
                             ))}
                         </ul>
@@ -64,8 +72,6 @@ const ReservationDetails = () => {
                     <h3>Total Bill</h3>
                     <p><strong>${totalBill.toFixed(2)}</strong></p>
                 </div>
-            ) : (
-                <p>Loading reservation details...</p>
             )}
         </div>
     );

@@ -4,6 +4,12 @@ import Logo from '../utils/img/Logo-big.png';
 import Position from '../utils/img/position.png';
 
 const Contact = () => {
+  const handleGetDirections = () => {
+    // Địa chỉ liên kết Google Maps mới
+    const googleMapsUrl = 'https://maps.app.goo.gl/up9LkFEi8YFaXx7a6';
+    window.open(googleMapsUrl, '_blank'); // Mở trong tab mới
+  };
+
   return (
     <div className="contact-page">
       <main>
@@ -34,7 +40,9 @@ const Contact = () => {
             <img src={Position} alt="Map" className="map-image" />
             <img src={Logo} alt="Logo" className="map-logo" />
           </div>
-          <button className="get-directions">GET DIRECTIONS</button>
+          <button className="get-directions" onClick={handleGetDirections}>
+            GET DIRECTIONS
+          </button>
         </div>
       </main>
     </div>
