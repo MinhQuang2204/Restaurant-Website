@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from './Loading';
+import './ReservationDetails.css'
 
 const ReservationDetails = () => {
     const { reservationid } = useParams();
@@ -42,7 +43,7 @@ const ReservationDetails = () => {
     };
 
     return (
-        <div>
+        <div className='detail-container'>
             {isLoading ? (
                 <Loading />
             ) : error ? (

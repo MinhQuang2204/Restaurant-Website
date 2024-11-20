@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './SearchReservation.css'
 
 const SearchReservation = () => {
     const [email, setEmail] = useState('');
@@ -27,7 +28,7 @@ const SearchReservation = () => {
     };
 
     return (
-        <div>
+        <div className='search-container'>
             <h2>Search Reservations</h2>
             <input
                 type="email"
