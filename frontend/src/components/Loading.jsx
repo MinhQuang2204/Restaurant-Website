@@ -2,7 +2,6 @@ import React from "react";
 import './Loading.css'
 const Loading = () => {
     return (
-        /* From Uiverse.io by Subaashbala */
         <div class="loader">
             <span class="l">
                 <svg

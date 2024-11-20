@@ -5,9 +5,8 @@ import Position from '../utils/img/position.png';
 
 const Contact = () => {
   const handleGetDirections = () => {
-    // Địa chỉ liên kết Google Maps mới
     const googleMapsUrl = 'https://maps.app.goo.gl/up9LkFEi8YFaXx7a6';
-    window.open(googleMapsUrl, '_blank'); // Mở trong tab mới
+    window.open(googleMapsUrl, '_blank'); 
   };
 
   return (
@@ -21,7 +20,9 @@ const Contact = () => {
             <li className='telephone'>
               <a href="tel:02837221223">📞 Telephone</a>
             </li>
-            <p>📍 Address</p>
+            <li className='telephone'>
+              <a href="https://maps.app.goo.gl/up9LkFEi8YFaXx7a6">📍 Address</a>
+            </li>
           </div>
 
           <div className="pitch-us">
