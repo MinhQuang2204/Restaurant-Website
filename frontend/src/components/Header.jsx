@@ -297,14 +297,6 @@ const Header = () => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
                             <NavLink
-                                to="/about"
-                                className={({ isActive }) =>
-                                    isActive ? "nav-link text-uppercase active" : "nav-link text-uppercase"
-                                }
-                            >
-                                About Us
-                            </NavLink>
-                            <NavLink
                                 to="/menu"
                                 className={({ isActive }) =>
                                     isActive ? "nav-link text-uppercase active" : "nav-link text-uppercase"
@@ -327,6 +319,14 @@ const Header = () => {
                                 }
                             >
                                 Contact
+                            </NavLink>
+                            <NavLink
+                                to="/search"
+                                className={({ isActive }) =>
+                                    isActive ? "nav-link text-uppercase active" : "nav-link text-uppercase"
+                                }
+                            >
+                                Search
                             </NavLink>
                         </Nav>
                     </Navbar.Collapse>

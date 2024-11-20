@@ -35,4 +35,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api/find_table/', find_table, name='find_table'),
     path('api/create_reservation/', create_reservation, name='create_reservation'),
+    path('api/search_reservation/', search_reservation, name='search_reservation'),
+    path('api/reservation_details/<int:reservationid>/', reservation_details, name='reservation_details'),
 ]

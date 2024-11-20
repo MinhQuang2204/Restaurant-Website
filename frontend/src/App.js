@@ -9,7 +9,8 @@ import Reserve from './pages/Reserve';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Reservation from './pages/Reservation';
-import TestAPI from './pages/testapi';
+import SearchReservation from './components/SearchReservation';
+import ReservationDetails from './components/ReservationDetails';
 
 const App = () => {
   return (
@@ -23,7 +24,8 @@ const App = () => {
         <Route path="/reserve" element={<Reserve />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/reservation" element={<Reservation />} />
-        <Route path='/testapi' element={<TestAPI />} />
+        <Route path="/search" element={<SearchReservation />} />
+        <Route path="/reservationdetails/:reservationid" element={<ReservationDetails />} />
       </Routes>
 
       <Footer />

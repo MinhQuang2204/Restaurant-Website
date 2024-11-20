@@ -101,3 +101,67 @@ def create_reservation(request):
                 'message': 'Reservation created successfully!',
                 'reservationid': reservation.reservationid 
             }, status=status.HTTP_201_CREATED)
+
+# Tìm kiếm các đặt bàn của khách hàng
+@api_view(['POST'])
+def search_reservation(request):
+    # Lấy thông tin tìm kiếm từ request
+    email = request.data.get('email', '')
+    phone = request.data.get('phone', '')
+    fullname = request.data.get('fullname', '')
+
+    # Tìm kiếm khách hàng dựa trên email, phone và fullname
+    customers = Customer.objects.filter(email=email, phone=phone, fullname=fullname)
+
+    if customers.exists():
+        # Lấy tất cả các đơn đặt bàn của khách hàng tìm thấy
+        customer = customers.first()
+        reservations = Reservation.objects.filter(email=customer)
+
+        # Serialize dữ liệu đặt bàn
+        reservation_data = ReservationSerializer(reservations, many=True)
+
+        return Response({
+            'reservations': reservation_data.data
+        }, status=status.HTTP_200_OK)
+    
+    return Response({
+        'message': 'No reservations found for this customer!'
+    }, status=status.HTTP_404_NOT_FOUND)
+
+# Lấy thông tin chi tiết một đặt bàn
+@api_view(['GET'])
+def reservation_details(request, reservationid):
+    try:
+        # Tìm đơn đặt bàn theo reservationid
+        reservation = Reservation.objects.get(reservationid=reservationid)
+        
+        # Serialize thông tin đặt bàn
+        reservation_data = ReservationSerializer(reservation).data
+
+        # Lấy danh sách món ăn liên quan đến reservation
+        dishes = Dishdetail.objects.filter(reservationid=reservation)
+
+        # Chuẩn bị dữ liệu chi tiết món ăn
+        dishes_data = []
+        for dish_detail in dishes:
+            dishes_data.append({
+                'dishid': dish_detail.dishid.dishid,  # ID của món ăn
+                'name': dish_detail.dishid.name,  # Tên món ăn
+                'quantity': dish_detail.quantity,  # Số lượng
+                'price_per_item': dish_detail.dishid.price,  # Giá từng món
+                'total_price': dish_detail.quantity * dish_detail.dishid.price  # Tổng giá tiền
+            })
+
+        return Response({
+            'reservation': reservation_data,
+            'dishes': dishes_data  # Trả về thông tin chi tiết các món ăn
+        }, status=status.HTTP_200_OK)
+
+    except Reservation.DoesNotExist:
+        return Response({
+            'message': 'Reservation not found!'
+        }, status=status.HTTP_404_NOT_FOUND)
+
+
+
